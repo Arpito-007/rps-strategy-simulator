@@ -48,6 +48,20 @@
       "ai": "paper",
       "result": "ai",
       "predicted": null
+    },
+    {
+      "timestamp": "2025-11-27T14:39:36",
+      "user": "rock",
+      "ai": "scissors",
+      "result": "user",
+      "predicted": null
+    },
+    {
+      "timestamp": "2025-11-27T14:42:06",
+      "user": "scissors",
+      "ai": "paper",
+      "result": "user",
+      "predicted": null
     }
   ]
 }

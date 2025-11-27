@@ -4,15 +4,6 @@ import os
 from datetime import datetime
 
 class DataManager:
-    """
-    Handles saving and loading game statistics to/from JSON.
-    Structure:
-    {
-      "games": [
-        {"timestamp": "...", "user": "rock", "ai": "paper", "result": "ai", "predicted": "rock"}
-      ]
-    }
-    """
 
     def __init__(self, path="data/stats.json"):
         self.path = path

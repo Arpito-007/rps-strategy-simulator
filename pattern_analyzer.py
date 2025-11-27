@@ -1,12 +1,18 @@
+# pattern_analyzer.py
+
 class PatternAnalyzer:
-    def __init__(self, memory_size=5):
+    #Stores user's move history and returns recent patterns.
+    
+    def __init__(self, memory_size=10):
         self.history = []
         self.memory_size = memory_size
 
     def add_move(self, move):
         self.history.append(move)
-        if len(self.history) > self.memory_size:
-            self.history.pop(0)
 
-    def recent_pattern(self):
-        return self.history[-self.memory_size:]
+    def recent(self, n=None):
+        #Return the last n moves (or memory_size by default).
+        if n is None:
+            n = self.memory_size
+        return self.history[-n:]
+

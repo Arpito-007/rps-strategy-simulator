@@ -1,0 +1,53 @@
+{
+  "games": [
+    {
+      "timestamp": "2025-11-27T14:01:45",
+      "user": "rock",
+      "ai": "rock",
+      "result": "draw",
+      "predicted": "scissors"
+    },
+    {
+      "timestamp": "2025-11-27T14:01:57",
+      "user": "rock",
+      "ai": "paper",
+      "result": "ai",
+      "predicted": "rock"
+    },
+    {
+      "timestamp": "2025-11-27T14:02:00",
+      "user": "rock",
+      "ai": "paper",
+      "result": "ai",
+      "predicted": "rock"
+    },
+    {
+      "timestamp": "2025-11-27T14:07:07",
+      "user": "rock",
+      "ai": "scissors",
+      "result": "user",
+      "predicted": null
+    },
+    {
+      "timestamp": "2025-11-27T14:07:14",
+      "user": "paper",
+      "ai": "scissors",
+      "result": "ai",
+      "predicted": null
+    },
+    {
+      "timestamp": "2025-11-27T14:07:33",
+      "user": "rock",
+      "ai": "rock",
+      "result": "draw",
+      "predicted": null
+    },
+    {
+      "timestamp": "2025-11-27T14:07:40",
+      "user": "rock",
+      "ai": "paper",
+      "result": "ai",
+      "predicted": null
+    }
+  ]
+}

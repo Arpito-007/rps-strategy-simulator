@@ -1,45 +1,77 @@
+# main.py
 from ai_engine import AIPredictor
 from data_handler import DataManager
-from analyzer import PatternAnalyzer
-from visualization import Visualizer
+from pattern_analyzer import PatternAnalyzer
+
+def choose_difficulty():
+    print("Choose difficulty:")
+    print("  1) Easy   (user has advantage)")
+    print("  2) Medium (50/50)")
+    print("  3) Hard   (AI uses strongest prediction)")
+    choice = input("Enter 1, 2 or 3 (default 2): ").strip()
+    if choice == "1":
+        return "easy"
+    if choice == "3":
+        return "hard"
+    return "medium"
 
 def get_user_move():
-    move = input("Enter move (rock/paper/scissors or q to quit): ").lower()
+    move = input("Enter move (rock/paper/scissors or q to quit): ").lower().strip()
     if move in ["rock", "paper", "scissors"]:
         return move
-    elif move == "q":
+    if move == "q":
         return None
-    else:
-        print("Invalid move. Try again.")
-        return get_user_move()
+    print("Invalid input. Try again.")
+    return get_user_move()
 
 def main():
-    dm = DataManager("data/stats.json")
-    analyzer = PatternAnalyzer()
-    ai = AIPredictor()
-    visual = Visualizer()
+    print("\n=== Strategy-Analyzing RPS Simulator (CLI) ===\n")
+    difficulty = choose_difficulty()
+    print(f"Selected difficulty: {difficulty.upper()}\n")
 
-    print("\n=== Strategy-Analyzing RPS Simulator ===\n")
+    data_manager = DataManager("data/stats.json")
+    analyzer = PatternAnalyzer(memory_size=20)
+    ai = AIPredictor(memory_size=20)
+
+    # preload history from saved games (so AI has more data across sessions)
+    for g in data_manager.get_games():
+        if "user" in g:
+            analyzer.add_move(g["user"])
+
+    total = 0
+    user_wins = 0
+    ai_wins = 0
+    draws = 0
 
     while True:
-        user = get_user_move()
-        if user is None:
+        user_move = get_user_move()
+        if user_move is None:
             break
 
-        analyzer.add_move(user)
-        predicted_player_move = ai.predict(analyzer.recent_pattern())
-        ai_move = ai.counter_move(predicted_player_move)
+        full_history = analyzer.history  # full history so predictor has max data
+        ai_move, predicted = ai.make_move(full_history, difficulty=difficulty)
+        result = ai.determine_winner(user_move, ai_move)
 
-        print(f"AI played: {ai_move}")
+        analyzer.add_move(user_move)
+        data_manager.record_game(user_move, ai_move, result)  # we keep storage minimal
+        data_manager.save()
 
-        result = ai.determine_winner(user, ai_move)
-        print(f"Result: {result}\n")
+        total += 1
+        if result == "user":
+            user_wins += 1
+            print(f"AI played: {ai_move}  -> You WIN this round!")
+        elif result == "ai":
+            ai_wins += 1
+            print(f"AI played: {ai_move}  -> AI WINS this round.")
+        else:
+            draws += 1
+            print(f"AI played: {ai_move}  -> It's a DRAW.")
 
-        dm.record_game(user, ai_move, result)
+        print(f"Predicted by AI: {predicted}")
+        print(f"Score: You {user_wins}  |  AI {ai_wins}  |  Draws {draws}  |  Rounds {total}\n")
 
-    dm.save()
-    visual.plot_stats(dm.stats)
-    print("\nSession saved!")
+    print("\nSession ended. Results saved to data/stats.json")
+    print(f"Final score - You: {user_wins}, AI: {ai_wins}, Draws: {draws}, Rounds: {total}\n")
 
 if __name__ == "__main__":
     main()

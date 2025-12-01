@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Scoreboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="hero"><div class="hero-inner"><h1 class="title">Scoreboard</h1></div></header>
+    <main class="center-area">
+      <section style="max-width:950px; margin:0 auto;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+          <div><strong>Total rounds:</strong> {{ games|length }}</div>
+          <div><strong>Your wins:</strong> {{ user_wins }}</div>
+          <div><strong>AI wins:</strong> {{ ai_wins }}</div>
+          <div><strong>Draws:</strong> {{ draws }}</div>
+        </div>
+
+        <table style="width:100%; border-collapse:collapse; text-align:left;">
+          <thead>
+            <tr><th>#</th><th>User</th><th>AI</th><th>Result</th><th>Time (UTC)</th></tr>
+          </thead>
+          <tbody>
+            {% for g in games %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ g.user }}</td>
+              <td>{{ g.ai }}</td>
+              <td>{{ g.result }}</td>
+              <td>{{ g.ts if g.ts is defined else '—' }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div style="margin-top:14px; text-align:right;">
+          <a href="{{ url_for('index') }}"><button class="mp-btn">Back</button></a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

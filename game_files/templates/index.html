@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Rock, Paper, Scissors — Aesthetic</title>
 
-  <!-- Google font (optional) -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
   <div class="page">
@@ -24,40 +24,58 @@
   </div>
 </header>
 
-   
+<main class="center-area">
+  <div class="circle-row" role="group" aria-label="RPS choices">
 
-    <main class="center-area">
-      <div class="circle-row" role="group" aria-label="RPS choices">
+    <!-- ROCK -->
+    <form action="{{ url_for('play') }}" method="post" class="rps-form">
+      <input type="hidden" name="move" value="rock">
+      <button type="submit" class="rps-card-btn">
+
         <div class="rps-card">
-          <button class="rps-btn" id="btn-rock" aria-label="Rock">
-            <!-- Put your rock.jpg at icons/rock.jpg -->
-            <img src="icons/stone.png" alt="rock" class="icon-img">
-          </button>
+          <img src="icons/stone.png" alt="rock" class="icon-img">
           <div class="label-title">ROCK</div>
           <div class="label-sub">Classic choice for a strong advantage.</div>
         </div>
 
+      </button>
+    </form>
+
+    <!-- PAPER -->
+    <form action="{{ url_for('play') }}" method="post" class="rps-form">
+      <input type="hidden" name="move" value="paper">
+      <button type="submit" class="rps-card-btn">
+
         <div class="rps-card">
-          <button class="rps-btn" id="btn-paper" aria-label="Paper">
-            <!-- Put your paper.jpg at icons/paper.jpg -->
-            <img src="icons/sheet.png" alt="paper" class="icon-img">
-          </button>
+          <img src="icons/sheet.png" alt="paper" class="icon-img">
           <div class="label-title">PAPER</div>
           <div class="label-sub">Versatile option to cover opponents' moves.</div>
         </div>
 
+      </button>
+    </form>
+
+    <!-- SCISSORS -->
+    <form action="{{ url_for('play') }}" method="post" class="rps-form">
+      <input type="hidden" name="move" value="scissors">
+      <button type="submit" class="rps-card-btn">
+
         <div class="rps-card">
-          <button class="rps-btn" id="btn-scissors" aria-label="Scissors">
-            <!-- Put your scissors.jpg at icons/scissors.jpg -->
-            <img src="icons/scissors.png" alt="scissors" class="icon-img">
-          </button>
+          <img src="icons/scissors.png" alt="scissors" class="icon-img">
           <div class="label-title">SCISSORS</div>
           <div class="label-sub">Sharp and strategic for clever plays.</div>
         </div>
-      </div>
-    </main>
 
-    <footer class="foot">Local preview — replace icons in /icons/ and wire JS later</footer>
+      </button>
+    </form>
+
+  </div>
+</main>
+
+
+   
+
+    <footer class="foot">Local preview</footer>
   </div>
   <!-- Floating multiplayer card (editable content) -->
 <div class="multiplayer-card" role="region" aria-label="Multiplayer Mode">

@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Change Difficulty</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="hero"><div class="hero-inner"><h1 class="title">Change Difficulty</h1></div></header>
+    <main class="center-area">
+      <form action="{{ url_for('change_difficulty') }}" method="post" style="text-align:center; margin-top:30px;">
+        <select name="difficulty" style="padding:8px 12px; font-size:16px;">
+          <option value="easy" {% if current=='easy' %}selected{% endif %}>Easy</option>
+          <option value="medium" {% if current=='medium' %}selected{% endif %}>Medium</option>
+          <option value="hard" {% if current=='hard' %}selected{% endif %}>Hard</option>
+        </select>
+        <div style="margin-top:18px;">
+          <button class="mp-btn" type="submit">Save & Return</button>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

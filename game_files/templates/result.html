@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Round Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="hero"><div class="hero-inner"><h1 class="title">Round Result</h1></div></header>
+    <main class="center-area" style="min-height:60vh;">
+      <section style="text-align:center; padding:36px;">
+        <p class="big">You played: <strong>{{ user_move|upper }}</strong></p>
+        <p class="big">AI played: <strong>{{ ai_move|upper }}</strong></p>
+        <p class="big">Outcome: <strong>{{ result|upper }}</strong></p>
+        <p class="muted">AI predicted: {{ predicted }}</p>
+
+        <div style="margin-top:28px; display:flex; gap:16px; justify-content:center;">
+          <form action="{{ url_for('index') }}" method="get">
+            <button class="mp-btn" type="submit">Continue Playing</button>
+          </form>
+
+          <form action="{{ url_for('change_difficulty') }}" method="get">
+            <button class="mp-btn" type="submit">Change Difficulty</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

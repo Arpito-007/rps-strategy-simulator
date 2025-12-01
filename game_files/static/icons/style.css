@@ -1,0 +1,275 @@
+:root{
+  --brown-600: #6b4827;   /* dark brown text/icons */
+  --brown-400: #C8B7A6;   /* border */
+  --beige: #EFE8E2;       /* circle interior */
+  --white: #ffffff;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%; margin:0; padding:0; background:var(--white); color:var(--brown-600); font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+
+.page{min-height:100vh; display:flex; flex-direction:column;}
+
+.rps-form{ display:flex; align-items:center; justify-content:center; }
+.rps-form .rps-btn{ border:none; background:transparent; padding:0; }
+
+
+.rps-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rps-card-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.rps-card-btn:focus {
+  outline: none;
+}
+
+.rps-card {
+  text-align: center;
+}
+
+
+/* ---------- Topbar + header layout ---------- */
+.topbar{
+  width:100%;
+  background: #F1E4DE;             /* soft beige strip */
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  padding:0 28px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02) inset;
+}
+
+.scoreboard-link{
+  font-family: "Pacifico", "Playfair Display", serif;
+  color: var(--brown-600);
+  font-size:20px;
+  text-decoration:none;
+  padding:8px 12px;
+  border-radius:6px;
+}
+
+/* hero inner centers the big title below topbar */
+.hero { padding:0; }
+.hero-inner{
+  padding: 28px 60px 18px 60px;
+  display:flex;
+  justify-content:center;
+}
+
+/* bigger, elegant title (matches reference) */
+.title {
+  font-family: "Playfair Display", serif;
+  font-size:72px;       /* large headline like screenshot */
+  margin:0;
+  color: var(--brown-600);
+  font-weight:600;
+  line-height:1.02;
+  max-width:1400px;
+  text-align:left;      /* keep left alignment when wide — matches your ref */
+}
+
+/* make sure the container doesn't push title full-width on small screens */
+@media (max-width:1400px){
+  .title { font-size:64px; text-align:center; padding:0 10px; }
+}
+@media (max-width:900px){
+  .title { font-size:32px; text-align:center; padding:0 12px; }
+}
+
+/* ---------- Adjustments to circles and spacing ---------- */
+.circle-row {
+  width: 100%;
+  max-width: 1500px;
+  display:flex;
+  justify-content:space-between;
+  gap: 64px;
+  margin-top: 36px;
+  padding: 0 40px;
+  align-items:flex-start;
+}
+
+/* bigger circular buttons — tuned for the new template */
+.rps-btn {
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  border:8px solid var(--brown-400);
+  background: radial-gradient(circle at 35% 25%, rgba(255,255,255,0.6) 0%, var(--beige) 40%, #f7efe8 100%);
+  box-shadow:
+    0 40px 80px rgba(107,72,39,0.10),
+    inset 0 -10px 22px rgba(0,0,0,0.035);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s ease;
+}
+
+.rps-btn:hover{ transform: translateY(-10px) scale(1.02); }
+.rps-btn:active{ transform: translateY(4px) scale(.995); box-shadow:0 18px 40px rgba(107,72,39,0.08); }
+
+/* icon sizing and vertical balance */
+.icon-img {
+  width:120px;
+  height:120px;
+  object-fit:contain;
+  display:block;
+  transform: translateY(-4px);
+}
+
+/* labels under each card (match reference look) */
+.label-title {
+  font-weight:700;
+  letter-spacing:2px;
+  margin-top:20px;
+  font-size:15px;
+  color: var(--brown-600);
+  text-align:center;
+}
+
+.label-sub {
+  color:#8a6f58;
+  font-size:15px;
+  text-align:center;
+  max-width:360px;
+  margin-top:20px;
+  line-height:1.6;
+}
+
+/* ---------- Multiplayer card (BOTTOM-LEFT) ---------- */
+.multiplayer-card{
+  position: fixed;
+
+  right: 28px;              /* moved from right → left */
+  bottom: 10px;            /* adjust up/down */
+
+  width: 320px;
+  background: #f4a941;
+  color: #2b2b2b;
+  border-radius: 8px;
+  padding: 14px 18px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  z-index: 1200;
+  font-family: "Inter", sans-serif;
+
+  cursor: pointer;
+  transition:
+    transform 0.2s cubic-bezier(.2,.9,.3,1),
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+/* Hover animation */
+.multiplayer-card:hover{
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.22);
+  filter: brightness(1.05);
+}
+
+/* Click animation */
+.multiplayer-card:active{
+  transform: translateY(4px) scale(0.98);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  filter: brightness(0.95);
+}
+
+/* Title + subtitle */
+.mp-title{
+  font-weight:700;
+  font-size:17px;
+  margin-bottom:4px;
+}
+
+.mp-sub{
+  font-size:12px;
+  opacity:0.8;
+  color: rgba(0,0,0,0.7);
+}
+
+/* Disable on very small screens */
+@media (max-width:520px){
+  .multiplayer-card{ display:none; }
+}
+
+
+/* ---------- Footer spacing (centered) ---------- */
+.foot{
+  text-align:center;
+  color:#b8977d;
+  font-size:13px;
+  padding:36px 0 40px 0;
+}
+
+
+/* header */
+.hero{padding:48px 72px 8px 72px;}
+.title{
+  font-family: "Playfair Display", serif;
+  font-size:56px;
+  margin:0;
+  font-weight:500;
+  color:var(--brown-600);
+  line-height:1.02;
+  letter-spacing:0.2px;
+}
+
+/* center area */
+.center-area{flex:1; display:flex; align-items:flex-start; justify-content:center; padding:30px 72px 80px 72px;}
+
+/* row of 3 cards */
+.circle-row{width:100%; max-width:1400px; display:flex; justify-content:space-between; gap:36px; align-items:flex-start;}
+
+/* each card wrapper (button + labels) */
+.rps-card{flex:1; display:flex; flex-direction:column; align-items:center; gap:18px; padding:10px 6px;}
+
+/* big circular button */
+.rps-btn{
+  background: linear-gradient(180deg, var(--beige) 0%, #f6efe9 100%);
+  width:210px; height:210px; border-radius:50%;
+  border:6px solid var(--brown-400);
+  box-shadow: 0 26px 50px rgba(107,72,39,0.08), inset 0 -8px 16px rgba(0,0,0,0.03);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition: transform .18s ease, box-shadow .18s ease;
+}
+
+/* hover/active */
+.rps-btn:hover{ transform: translateY(-8px) scale(1.02); }
+.rps-btn:active{ transform: translateY(4px) scale(.99); box-shadow:0 8px 24px rgba(107,72,39,0.06); }
+
+/* image inside circle */
+.icon-img{ width:92px; height:92px; object-fit:fill; display:block; filter: none; }
+
+/* labels under card */
+.label-title{ font-weight:700; letter-spacing:1px; margin-top:6px; text-align:center; }
+.label-sub{ color:#8a6f58; font-size:15px; text-align:center; max-width:320px; }
+
+/* footer */
+.foot{ text-align:center; padding:18px 24px; color:#b8977d; font-size:13px; }
+
+/* RESPONSIVE */
+@media (max-width:1100px){
+  .title{ font-size:40px; padding-right:20px; }
+  .rps-btn{ width:170px; height:170px; }
+  .icon-img{ width:72px; height:72px; }
+  .circle-row{ gap:18px; }
+}
+
+@media (max-width:720px){
+  .hero{ padding:28px 18px; }
+  .center-area{ padding:18px 20px 40px 20px; }
+  .title{ font-size:28px; }
+  .circle-row{ flex-direction:column; align-items:center; max-width:420px; }
+  .rps-card{ width:100%; }
+  .rps-btn{ width:140px; height:140px; }
+  .icon-img{ width:56px; height:56px; }
+  .label-sub{ max-width:100%; padding:0 12px; }
+}
+

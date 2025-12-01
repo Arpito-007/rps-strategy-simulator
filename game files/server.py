@@ -1,59 +1,79 @@
-# server.py
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, redirect, url_for
 from ai_engine import AIPredictor
 from pattern_analyzer import PatternAnalyzer
 from data_handler import DataManager
 
-app = Flask(__name__, static_folder="static", template_folder="templates")
+app = Flask(__name__, template_folder="templates", static_folder="static")
 
-# global state
+# core objects
 difficulty = "medium"
 ai = AIPredictor(memory_size=20)
 analyzer = PatternAnalyzer(memory_size=20)
 dm = DataManager("data/stats.json")
 
-# preload history
+# preload history if any
 for g in dm.get_games():
     if "user" in g:
         analyzer.add_move(g["user"])
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", difficulty=difficulty)
 
-@app.post("/play")
+@app.route("/play", methods=["POST"])
 def play():
-    data = request.get_json(force=True)
-    user_move = data.get("user_move")
-    if user_move not in ("rock","paper","scissors"):
-        return jsonify({"error": "invalid move"}), 400
+    user_move = request.form.get("move")
+    if user_move not in ("rock", "paper", "scissors"):
+        return redirect(url_for("index"))
 
+    # AI move + predicted next move
     ai_move, predicted = ai.make_move(analyzer.history, difficulty=difficulty)
+
+    # determine winner
     result = ai.determine_winner(user_move, ai_move)
 
+    # update analyzer + save stats
     analyzer.add_move(user_move)
-    dm.record_game(user_move, ai_move, result)
+    dm.record_game(user_move, ai_move, result, predicted)
     dm.save()
 
-    return jsonify({"ai_move": ai_move, "predicted": predicted, "result": result})
+    # return result page
+    return render_template(
+        "result.html",
+        user_move=user_move,
+        ai_move=ai_move,
+        predicted=predicted,
+        result=result,
+        difficulty=difficulty
+    )
 
-@app.post("/set_difficulty")
-def set_difficulty():
+@app.route("/change_difficulty", methods=["GET", "POST"])
+def change_difficulty():
     global difficulty
-    data = request.get_json(force=True)
-    level = data.get("level")
-    if level not in ("easy","medium","hard"):
-        return jsonify({"error":"invalid difficulty"}), 400
-    difficulty = level
-    return jsonify({"status":"ok","difficulty":difficulty})
+    if request.method == "POST":
+        new = request.form.get("difficulty")
+        if new in ("easy", "medium", "hard"):
+            difficulty = new
+        return redirect(url_for("index"))
+    return render_template("change_difficulty.html", current=difficulty)
 
-@app.get("/stats")
-def stats():
-    games = dm.get_all_games()
+@app.route("/scoreboard")
+def scoreboard():
+    games = dm.get_games()
+
     user_wins = sum(1 for g in games if g.get("result") == "user")
     ai_wins = sum(1 for g in games if g.get("result") == "ai")
     draws = sum(1 for g in games if g.get("result") == "draw")
-    return jsonify({"total": len(games), "user_wins": user_wins, "ai_wins": ai_wins, "draws": draws})
+
+    return render_template(
+        "scoreboard.html",
+        games=games,
+        user_wins=user_wins,
+        ai_wins=ai_wins,
+        draws=draws
+    )
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
+
+

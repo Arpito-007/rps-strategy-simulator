@@ -33,7 +33,7 @@
       <button type="submit" class="rps-card-btn">
 
         <div class="rps-card">
-          <img src="icons/stone.png" alt="rock" class="icon-img">
+          <img src="{{ url_for('static', filename='icons/stone.png') }}" alt="stone" class="icon-img">
           <div class="label-title">ROCK</div>
           <div class="label-sub">Classic choice for a strong advantage.</div>
         </div>
@@ -47,7 +47,7 @@
       <button type="submit" class="rps-card-btn">
 
         <div class="rps-card">
-          <img src="icons/sheet.png" alt="paper" class="icon-img">
+          <img src="{{ url_for('static', filename='icons/sheet.png') }}" alt="paper" class="icon-img">
           <div class="label-title">PAPER</div>
           <div class="label-sub">Versatile option to cover opponents' moves.</div>
         </div>
@@ -61,7 +61,7 @@
       <button type="submit" class="rps-card-btn">
 
         <div class="rps-card">
-          <img src="icons/scissors.png" alt="scissors" class="icon-img">
+          <img src="{{ url_for('static', filename='icons/scissors.png') }}" alt="scissors" class="icon-img">
           <div class="label-title">SCISSORS</div>
           <div class="label-sub">Sharp and strategic for clever plays.</div>
         </div>

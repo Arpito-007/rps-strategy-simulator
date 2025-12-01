@@ -41,6 +41,34 @@
       "ai": "paper",
       "result": "ai",
       "predicted": "rock"
+    },
+    {
+      "timestamp": "2025-12-01T10:01:10",
+      "user": "rock",
+      "ai": "paper",
+      "result": "ai",
+      "predicted": "rock"
+    },
+    {
+      "timestamp": "2025-12-01T10:01:14",
+      "user": "paper",
+      "ai": "paper",
+      "result": "draw",
+      "predicted": "rock"
+    },
+    {
+      "timestamp": "2025-12-01T10:03:13",
+      "user": "rock",
+      "ai": "paper",
+      "result": "ai",
+      "predicted": "rock"
+    },
+    {
+      "timestamp": "2025-12-01T10:03:23",
+      "user": "rock",
+      "ai": "paper",
+      "result": "ai",
+      "predicted": "rock"
     }
   ]
 }

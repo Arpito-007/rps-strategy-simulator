@@ -7,6 +7,10 @@ from data_handler import DataManager
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
+if __name__ == "__main__":
+    app.run()
+
+
 # ------------------ Core objects ------------------
 
 difficulty = "medium"  # default difficulty

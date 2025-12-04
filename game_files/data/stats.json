@@ -1,72 +1,23 @@
 {
   "games": [
     {
-      "timestamp": "2025-12-04T09:18:32",
-      "user": "paper",
-      "ai": "paper",
-      "result": "draw",
-      "predicted": "rock"
-    },
-    {
-      "timestamp": "2025-12-04T09:18:38",
-      "user": "scissors",
-      "ai": "scissors",
-      "result": "draw",
-      "predicted": "paper"
-    },
-    {
-      "timestamp": "2025-12-04T09:18:40",
-      "user": "rock",
-      "ai": "rock",
-      "result": "draw",
-      "predicted": "scissors"
-    },
-    {
-      "timestamp": "2025-12-04T09:20:31",
-      "user": "paper",
-      "ai": "rock",
-      "result": "user",
-      "predicted": "scissors"
-    },
-    {
-      "timestamp": "2025-12-04T09:20:41",
+      "timestamp": "2025-12-04T16:13:57",
       "user": "paper",
       "ai": "paper",
       "result": "draw",
       "predicted": "paper"
     },
     {
-      "timestamp": "2025-12-04T09:20:57",
+      "timestamp": "2025-12-04T16:14:00",
       "user": "paper",
       "ai": "scissors",
       "result": "ai",
       "predicted": "paper"
     },
     {
-      "timestamp": "2025-12-04T09:21:02",
+      "timestamp": "2025-12-04T16:14:01",
       "user": "rock",
       "ai": "scissors",
-      "result": "user",
-      "predicted": "paper"
-    },
-    {
-      "timestamp": "2025-12-04T09:21:11",
-      "user": "scissors",
-      "ai": "scissors",
-      "result": "draw",
-      "predicted": "paper"
-    },
-    {
-      "timestamp": "2025-12-04T09:21:16",
-      "user": "paper",
-      "ai": "scissors",
-      "result": "ai",
-      "predicted": "paper"
-    },
-    {
-      "timestamp": "2025-12-04T09:22:25",
-      "user": "paper",
-      "ai": "rock",
       "result": "user",
       "predicted": "paper"
     }

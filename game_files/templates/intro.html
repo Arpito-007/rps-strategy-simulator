@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI RPS – Welcome</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="intro-page">
+  <div class="intro-wrapper">
+    <div class="cloud-swoosh"></div>
+
+    <div class="intro-text-block">
+      <h1 class="intro-title">AI based RPS Game</h1>
+      <p class="intro-sub">Rock · Paper · Scissors with adaptive AI</p>
+
+      <a href="{{ url_for('index') }}" class="start-btn">
+        Start Game
+      </a>
+    </div>
+  </div>
+</body>
+</html>

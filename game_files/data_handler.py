@@ -8,7 +8,6 @@ class DataManager:
         self.path = path
         self.stats = {"games": []}
 
-        # ensure folder exists
         folder = os.path.dirname(path)
         if folder and not os.path.exists(folder):
             os.makedirs(folder, exist_ok=True)

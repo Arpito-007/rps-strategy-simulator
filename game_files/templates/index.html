@@ -6,86 +6,113 @@
   <title>Rock, Paper, Scissors — Aesthetic</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
   <div class="page">
     <header class="hero">
-  <!-- top thin bar with scoreboard link -->
-  <div class="topbar">
-    <a href="{{ url_for('scoreboard') }}" class="scoreboard-link">
-      View Scoreboard
-    </a>
-  </div>
 
+      <!-- top thin bar with scoreboard link + TIMER PILL -->
+      <div class="topbar">
+        <a href="{{ url_for('scoreboard') }}" class="scoreboard-link">View Scoreboard</a>
 
-  <!-- main centered title -->
-  <div class="hero-inner">
-    <h1 class="title">Rock, Paper, Scissors: Choose Your Weapon</h1>
-  </div>
-</header>
-
-<main class="center-area">
-  <div class="circle-row" role="group" aria-label="RPS choices">
-
-    <!-- ROCK -->
-    <form action="{{ url_for('play') }}" method="post" class="rps-form">
-      <input type="hidden" name="move" value="rock">
-      <button type="submit" class="rps-card-btn">
-
-        <div class="rps-card">
-          <img src="{{ url_for('static', filename='icons/stone.png') }}" alt="stone" class="icon-img">
-          <div class="label-title">ROCK</div>
-          <div class="label-sub">Classic choice for a strong advantage.</div>
+        <div class="timer-pill">
+          <div class="timer-label">Time left to choose a move</div>
+          <div class="timer-number">
+            <span id="timer-value">40</span>s
+          </div>
         </div>
+      </div>
 
-      </button>
-    </form>
+      <!-- main centered title -->
+      <div class="hero-inner">
+        <h1 class="title">Rock, Paper, Scissors: Choose Your Weapon</h1>
+      </div>
+    </header>
 
-    <!-- PAPER -->
-    <form action="{{ url_for('play') }}" method="post" class="rps-form">
-      <input type="hidden" name="move" value="paper">
-      <button type="submit" class="rps-card-btn">
+    <main class="center-area">
+      <div class="circle-row" role="group" aria-label="RPS choices">
 
-        <div class="rps-card">
-          <img src="{{ url_for('static', filename='icons/sheet.png') }}" alt="paper" class="icon-img">
-          <div class="label-title">PAPER</div>
-          <div class="label-sub">Versatile option to cover opponents' moves.</div>
-        </div>
+        <!-- ROCK -->
+        <form action="{{ url_for('play') }}" method="post" class="rps-form">
+          <input type="hidden" name="move" value="rock">
+          <button type="submit" class="rps-card-btn">
+            <div class="rps-card">
+              <img src="{{ url_for('static', filename='icons/stone.png') }}" alt="stone" class="icon-img">
+              <div class="label-title">ROCK</div>
+              <div class="label-sub">Classic choice for a strong advantage.</div>
+            </div>
+          </button>
+        </form>
 
-      </button>
-    </form>
+        <!-- PAPER -->
+        <form action="{{ url_for('play') }}" method="post" class="rps-form">
+          <input type="hidden" name="move" value="paper">
+          <button type="submit" class="rps-card-btn">
+            <div class="rps-card">
+              <img src="{{ url_for('static', filename='icons/sheet.png') }}" alt="paper" class="icon-img">
+              <div class="label-title">PAPER</div>
+              <div class="label-sub">Versatile option to cover opponents' moves.</div>
+            </div>
+          </button>
+        </form>
 
-    <!-- SCISSORS -->
-    <form action="{{ url_for('play') }}" method="post" class="rps-form">
-      <input type="hidden" name="move" value="scissors">
-      <button type="submit" class="rps-card-btn">
+        <!-- SCISSORS -->
+        <form action="{{ url_for('play') }}" method="post" class="rps-form">
+          <input type="hidden" name="move" value="scissors">
+          <button type="submit" class="rps-card-btn">
+            <div class="rps-card">
+              <img src="{{ url_for('static', filename='icons/scissors.png') }}" alt="scissors" class="icon-img">
+              <div class="label-title">SCISSORS</div>
+              <div class="label-sub">Sharp and strategic for clever plays.</div>
+            </div>
+          </button>
+        </form>
 
-        <div class="rps-card">
-          <img src="{{ url_for('static', filename='icons/scissors.png') }}" alt="scissors" class="icon-img">
-          <div class="label-title">SCISSORS</div>
-          <div class="label-sub">Sharp and strategic for clever plays.</div>
-        </div>
-
-      </button>
-    </form>
-
-  </div>
-</main>
-
-
-   
+      </div>
+    </main>
 
     <footer class="foot">Local preview</footer>
   </div>
-  <!-- Floating multiplayer card (editable content) -->
-<div class="multiplayer-card" role="region" aria-label="Multiplayer Mode">
-  <div class="mp-title">Multiplayer Mode</div>
-  <div class="mp-sub">click here to join game</div>
-</div>
 
+  <!-- hidden form that is submitted if player doesn't pick in time -->
+  <form id="timeout-form" action="{{ url_for('play') }}" method="post" style="display:none;">
+    <input type="hidden" name="move" value="none">
+  </form>
+
+  <script>
+    (function() {
+      let timeLeft = 40;
+      const timerEl = document.getElementById("timer-value");
+      const timeoutForm = document.getElementById("timeout-form");
+      let moveChosen = false;
+
+      // if any move button is clicked, stop the timer and DO NOT auto-submit
+      document.querySelectorAll(".rps-card-btn").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          moveChosen = true;
+        });
+      });
+
+      if (!timerEl) return;
+
+      const intervalId = setInterval(function () {
+        if (moveChosen) {
+          clearInterval(intervalId);
+          return;
+        }
+
+        timeLeft -= 1;
+        if (timeLeft <= 0) {
+          timeLeft = 0;
+          clearInterval(intervalId);
+          if (timeoutForm) {
+            timeoutForm.submit();  // auto-submit NONE when time runs out
+          }
+        }
+        timerEl.textContent = timeLeft;
+      }, 1000);
+    })();
+  </script>
 </body>
 </html>
-

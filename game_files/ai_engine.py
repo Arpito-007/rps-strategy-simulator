@@ -123,5 +123,3 @@ class AIPredictor:
         if (user, ai) in wins:
             return "user"
         return "ai"
-
-

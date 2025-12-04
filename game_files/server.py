@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from ai_engine import AIPredictor
 from pattern_analyzer import PatternAnalyzer
@@ -15,8 +16,8 @@ ai = AIPredictor(memory_size=20)
 analyzer = PatternAnalyzer(memory_size=20)
 dm = DataManager("data/stats.json")
 
-# If you want a fresh scoreboard + AI each time you start the server,
-# keep these two lines. If you want persistence across runs, comment them out.
+# If you want a fresh scoreboard + AI each time the server starts, keep these.
+# If you want persistence across restarts, comment them out.
 dm.clear_games()
 analyzer.history.clear()
 
@@ -35,7 +36,7 @@ def intro():
 
 
 @app.route("/game")
-def game():
+def index():
     """Main game UI page."""
     return render_template("index.html", difficulty=difficulty)
 
@@ -47,7 +48,7 @@ def play():
 
     # allow timeout move "none" as well
     if user_move not in ("rock", "paper", "scissors", "none"):
-        return redirect(url_for("game"))
+        return redirect(url_for("index"))
 
     # AI move + predicted next move
     ai_move, predicted = ai.make_move(analyzer.history, difficulty=difficulty)
@@ -96,7 +97,7 @@ def change_difficulty():
         if new in ("easy", "medium", "hard"):
             difficulty = new
         # whatever happens, go back to main game page
-        return redirect(url_for("game"))
+        return redirect(url_for("index"))
 
     # GET request: just show the page with current difficulty
     return render_template("change_difficulty.html", current=difficulty)
@@ -128,8 +129,8 @@ def reset_scoreboard():
     return redirect(url_for("scoreboard"))
 
 
-# ------------------ Run server locally ONLY ------------------
+# ------------------ Run server (for Railway & local) ------------------
 
 if __name__ == "__main__":
-    # This is used only when you do: python server.py
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))  # Railway sets PORT env var
+    app.run(host="0.0.0.0", port=port)

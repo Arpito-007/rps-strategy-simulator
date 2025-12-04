@@ -7,10 +7,6 @@ from data_handler import DataManager
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
-if __name__ == "__main__":
-    app.run()
-
-
 # ------------------ Core objects ------------------
 
 difficulty = "medium"  # default difficulty
@@ -31,6 +27,7 @@ for g in dm.get_games():
 
 # ------------------ Routes ------------------
 
+
 @app.route("/")
 def intro():
     """Splash / landing page."""
@@ -38,17 +35,9 @@ def intro():
 
 
 @app.route("/game")
-def index():
+def game():
     """Main game UI page."""
     return render_template("index.html", difficulty=difficulty)
-
-
-
-@app.route("/game")
-def game():
-    """Backward-compat: any url_for('game') just shows main page."""
-    return redirect(url_for("index"))
-
 
 
 @app.route("/play", methods=["POST"])
@@ -58,7 +47,7 @@ def play():
 
     # allow timeout move "none" as well
     if user_move not in ("rock", "paper", "scissors", "none"):
-        return redirect(url_for("index"))
+        return redirect(url_for("game"))
 
     # AI move + predicted next move
     ai_move, predicted = ai.make_move(analyzer.history, difficulty=difficulty)
@@ -107,7 +96,7 @@ def change_difficulty():
         if new in ("easy", "medium", "hard"):
             difficulty = new
         # whatever happens, go back to main game page
-        return redirect(url_for("index"))
+        return redirect(url_for("game"))
 
     # GET request: just show the page with current difficulty
     return render_template("change_difficulty.html", current=difficulty)
@@ -139,7 +128,8 @@ def reset_scoreboard():
     return redirect(url_for("scoreboard"))
 
 
-# ------------------ Run server ------------------
+# ------------------ Run server locally ONLY ------------------
 
 if __name__ == "__main__":
+    # This is used only when you do: python server.py
     app.run(debug=True, host="0.0.0.0", port=5000)

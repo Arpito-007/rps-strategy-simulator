@@ -1,32 +1,18 @@
 {
   "games": [
     {
-      "timestamp": "2025-12-04T16:13:57",
-      "user": "paper",
-      "ai": "paper",
+      "timestamp": "2025-12-04T17:39:50",
+      "user": "rock",
+      "ai": "rock",
       "result": "draw",
       "predicted": "paper"
     },
     {
-      "timestamp": "2025-12-04T16:14:00",
+      "timestamp": "2025-12-04T17:39:53",
       "user": "paper",
-      "ai": "scissors",
-      "result": "ai",
-      "predicted": "paper"
-    },
-    {
-      "timestamp": "2025-12-04T16:14:01",
-      "user": "rock",
-      "ai": "scissors",
-      "result": "user",
-      "predicted": "paper"
-    },
-    {
-      "timestamp": "2025-12-04T16:14:53",
-      "user": "none",
-      "ai": "scissors",
-      "result": "ai",
-      "predicted": "paper"
+      "ai": "paper",
+      "result": "draw",
+      "predicted": "rock"
     }
   ]
 }

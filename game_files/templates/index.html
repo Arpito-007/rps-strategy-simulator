@@ -80,39 +80,47 @@
     <input type="hidden" name="move" value="none">
   </form>
 
-  <script>
-    (function() {
-      let timeLeft = 40;
-      const timerEl = document.getElementById("timer-value");
-      const timeoutForm = document.getElementById("timeout-form");
-      let moveChosen = false;
+<script>
+(function() {
+  let timeLeft = 40;
+  const timerEl = document.getElementById("timer-value");
+  const timeoutForm = document.getElementById("timeout-form");
+  let moveChosen = false;
 
-      // if any move button is clicked, stop the timer and DO NOT auto-submit
-      document.querySelectorAll(".rps-card-btn").forEach(function(btn) {
-        btn.addEventListener("click", function() {
-          moveChosen = true;
-        });
-      });
+  // stop timer when player clicks a move
+  document.querySelectorAll(".rps-card-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      moveChosen = true;
+    });
+  });
 
-      if (!timerEl) return;
+  if (!timerEl) return;
 
-      const intervalId = setInterval(function () {
-        if (moveChosen) {
-          clearInterval(intervalId);
-          return;
-        }
+  const intervalId = setInterval(function () {
+    if (moveChosen) {
+      clearInterval(intervalId);
+      return;
+    }
 
-        timeLeft -= 1;
-        if (timeLeft <= 0) {
-          timeLeft = 0;
-          clearInterval(intervalId);
-          if (timeoutForm) {
-            timeoutForm.submit();  // auto-submit NONE when time runs out
-          }
-        }
-        timerEl.textContent = timeLeft;
-      }, 1000);
-    })();
-  </script>
+    timeLeft -= 1;
+
+    // 🔥 ADD THIS — timer turns red and shakes
+    if (timeLeft <= 5) {
+      timerEl.classList.add("timer-danger");
+    }
+
+    if (timeLeft <= 0) {
+      timeLeft = 0;
+      clearInterval(intervalId);
+      if (timeoutForm) timeoutForm.submit();
+    }
+
+    timerEl.textContent = timeLeft;
+  }, 1000);
+})();
+</script>
+
+
+
 </body>
 </html>

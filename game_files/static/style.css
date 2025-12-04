@@ -273,3 +273,227 @@ html,body{height:100%; margin:0; padding:0; background:var(--white); color:var(-
   .label-sub{ max-width:100%; padding:0 12px; }
 }
 
+/* ===========================
+   RESULT PAGE – "SCORE" LAYOUT
+   =========================== */
+
+.score-page {
+  min-height: 100vh;
+  margin: 0;
+  background: #fffdf7;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* CLEAN SCORE HEADER (no yellow bar) */
+.clean-header {
+  background: none !important;
+  padding: 40px 0 10px;
+  text-align: center;
+}
+
+.clean-header h1 {
+  margin: 0;
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: 3rem;
+  letter-spacing: 0.05em;
+  color: #2b1607;  /* dark brown aesthetic */
+}
+
+
+.score-header h1 {
+  margin: 0;
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: 3rem;
+  letter-spacing: 0.05em;
+  color: #2b1607;
+}
+
+.score-main {
+  padding: 60px 6vw 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Four columns: You Played, AI Played, Result, AI Predicted */
+.score-grid {
+  width: 100%;
+  max-width: 1150px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.score-column {
+  text-align: center;
+}
+
+.score-col-title {
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  color: #2b1607;
+}
+
+.score-box {
+  background: #ffc04d;
+  border-radius: 18px;
+  min-height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.12);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #3a220c;
+  text-transform: uppercase;
+}
+
+/* buttons area */
+.score-actions {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+
+.score-btn {
+  display: inline-block;
+  padding: 10px 36px;
+  border-radius: 24px;
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.score-btn-primary {
+  background: #e9a5ff;          /* pastel purple */
+  color: #3e1542;
+}
+
+.score-btn-secondary {
+  background: #f1b5ff;          /* slightly lighter purple */
+  color: #3e1542;
+}
+
+.score-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.22);
+}
+
+.score-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.16);
+}
+
+/* Responsive tweaks */
+@media (max-width: 960px) {
+  .score-grid {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .score-grid {
+    grid-template-columns: 1fr;
+  }
+  .score-main {
+    padding: 40px 4vw 60px;
+  }
+}
+
+/* ===========================
+   CHANGE DIFFICULTY PAGE
+   =========================== */
+
+.diff-page {
+  min-height: 100vh;
+  margin: 0;
+  background: #ffffff;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.diff-header {
+  text-align: center;
+  padding-top: 60px;
+}
+
+.diff-header h1 {
+  margin: 0;
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: 3.2rem;
+  color: #6b3d1f; /* same brown as main title */
+}
+
+.diff-main {
+  padding: 40px 6vw 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.diff-grid {
+  width: 100%;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.diff-form {
+  margin: 0;
+}
+
+.diff-card {
+  width: 100%;
+  min-height: 160px;
+  border-radius: 18px;
+  border: none;
+  background: #9d9d9d;       /* grey like your mockup */
+  color: #000;
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.diff-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 38px rgba(0, 0, 0, 0.22);
+  background: #b3b3b3;
+}
+
+.diff-card:active {
+  transform: translateY(0);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18);
+}
+
+.diff-card-active {
+  background: #7b7b7b;       /* darker grey to show selected difficulty */
+  color: #fff;
+}
+
+.diff-back {
+  margin-top: 50px;
+}
+
+/* small screens */
+@media (max-width: 768px) {
+  .diff-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+  }
+}

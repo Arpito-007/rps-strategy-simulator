@@ -1,25 +1,58 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Change Difficulty</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-  <div class="page">
-    <header class="hero"><div class="hero-inner"><h1 class="title">Change Difficulty</h1></div></header>
-    <main class="center-area">
-      <form action="{{ url_for('change_difficulty') }}" method="post" style="text-align:center; margin-top:30px;">
-        <select name="difficulty" style="padding:8px 12px; font-size:16px;">
-          <option value="easy" {% if current=='easy' %}selected{% endif %}>Easy</option>
-          <option value="medium" {% if current=='medium' %}selected{% endif %}>Medium</option>
-          <option value="hard" {% if current=='hard' %}selected{% endif %}>Hard</option>
-        </select>
-        <div style="margin-top:18px;">
-          <button class="mp-btn" type="submit">Save & Return</button>
-        </div>
+<body class="diff-page">
+
+  <header class="diff-header">
+    <h1>Change Difficulty</h1>
+  </header>
+
+  <main class="diff-main">
+    <div class="diff-grid">
+
+      <!-- EASY -->
+      <form action="{{ url_for('change_difficulty') }}" method="post" class="diff-form">
+        <input type="hidden" name="difficulty" value="easy">
+        <button type="submit"
+                class="diff-card {% if current == 'easy' %}diff-card-active{% endif %}">
+          Easy
+        </button>
       </form>
-    </main>
-  </div>
+
+      <!-- MEDIUM -->
+      <form action="{{ url_for('change_difficulty') }}" method="post" class="diff-form">
+        <input type="hidden" name="difficulty" value="medium">
+        <button type="submit"
+                class="diff-card {% if current == 'medium' %}diff-card-active{% endif %}">
+          Medium
+        </button>
+      </form>
+
+      <!-- HARD -->
+      <form action="{{ url_for('change_difficulty') }}" method="post" class="diff-form">
+        <input type="hidden" name="difficulty" value="hard">
+        <button type="submit"
+                class="diff-card {% if current == 'hard' %}diff-card-active{% endif %}">
+          Hard
+        </button>
+      </form>
+
+    </div>
+
+    <div class="diff-back">
+      <a href="{{ url_for('index') }}" class="score-btn score-btn-secondary">
+        Back to game
+      </a>
+    </div>
+  </main>
+
 </body>
 </html>
+

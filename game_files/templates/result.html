@@ -1,31 +1,75 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Round Result</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Score</title>
+
+  <!-- same fonts as index, keep it consistent -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-  <div class="page">
-    <header class="hero"><div class="hero-inner"><h1 class="title">Round Result</h1></div></header>
-    <main class="center-area" style="min-height:60vh;">
-      <section style="text-align:center; padding:36px;">
-        <p class="big">You played: <strong>{{ user_move|upper }}</strong></p>
-        <p class="big">AI played: <strong>{{ ai_move|upper }}</strong></p>
-        <p class="big">Outcome: <strong>{{ result|upper }}</strong></p>
-        <p class="muted">AI predicted: {{ predicted }}</p>
+<body class="score-page">
 
-        <div style="margin-top:28px; display:flex; gap:16px; justify-content:center;">
-          <form action="{{ url_for('index') }}" method="get">
-            <button class="mp-btn" type="submit">Continue Playing</button>
-          </form>
+<header class="score-header clean-header">
+  <h1>Score</h1>
+</header>
 
-          <form action="{{ url_for('change_difficulty') }}" method="get">
-            <button class="mp-btn" type="submit">Change Difficulty</button>
-          </form>
+
+  <main class="score-main">
+
+    <div class="score-grid">
+      <!-- You Played -->
+      <div class="score-column">
+        <div class="score-col-title">You Played</div>
+        <div class="score-box">
+          {{ user_move|upper }}
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
+
+      <!-- AI Played -->
+      <div class="score-column">
+        <div class="score-col-title">AI Played</div>
+        <div class="score-box">
+          {{ ai_move|upper }}
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="score-column">
+        <div class="score-col-title">Result</div>
+        <div class="score-box">
+          {% if result == 'user' %}
+            YOU WON
+          {% elif result == 'ai' %}
+            AI WON
+          {% else %}
+            DRAW
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- AI Predicted -->
+      <div class="score-column">
+        <div class="score-col-title">AI Predicted</div>
+        <div class="score-box">
+          {{ predicted|upper if predicted else "—" }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="score-actions">
+      <a href="{{ url_for('index') }}" class="score-btn score-btn-primary">
+        Continue playing
+      </a>
+      <a href="{{ url_for('change_difficulty') }}" class="score-btn score-btn-secondary">
+        Change difficulty
+      </a>
+    </div>
+
+  </main>
 </body>
 </html>
+

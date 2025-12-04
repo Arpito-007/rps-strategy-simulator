@@ -1,74 +1,74 @@
 {
   "games": [
     {
-      "timestamp": "2025-12-01T09:26:49",
-      "user": "rock",
-      "ai": "scissors",
-      "result": "user",
-      "predicted": "scissors"
-    },
-    {
-      "timestamp": "2025-12-01T09:27:01",
-      "user": "rock",
-      "ai": "paper",
-      "result": "ai",
-      "predicted": "rock"
-    },
-    {
-      "timestamp": "2025-12-01T09:32:44",
-      "user": "rock",
-      "ai": "paper",
-      "result": "ai",
-      "predicted": "rock"
-    },
-    {
-      "timestamp": "2025-12-01T09:32:55",
-      "user": "rock",
-      "ai": "paper",
-      "result": "ai",
-      "predicted": "rock"
-    },
-    {
-      "timestamp": "2025-12-01T09:32:58",
-      "user": "rock",
-      "ai": "paper",
-      "result": "ai",
-      "predicted": "rock"
-    },
-    {
-      "timestamp": "2025-12-01T09:36:55",
-      "user": "rock",
-      "ai": "paper",
-      "result": "ai",
-      "predicted": "rock"
-    },
-    {
-      "timestamp": "2025-12-01T10:01:10",
-      "user": "rock",
-      "ai": "paper",
-      "result": "ai",
-      "predicted": "rock"
-    },
-    {
-      "timestamp": "2025-12-01T10:01:14",
+      "timestamp": "2025-12-04T09:18:32",
       "user": "paper",
       "ai": "paper",
       "result": "draw",
       "predicted": "rock"
     },
     {
-      "timestamp": "2025-12-01T10:03:13",
-      "user": "rock",
-      "ai": "paper",
-      "result": "ai",
-      "predicted": "rock"
+      "timestamp": "2025-12-04T09:18:38",
+      "user": "scissors",
+      "ai": "scissors",
+      "result": "draw",
+      "predicted": "paper"
     },
     {
-      "timestamp": "2025-12-01T10:03:23",
+      "timestamp": "2025-12-04T09:18:40",
       "user": "rock",
+      "ai": "rock",
+      "result": "draw",
+      "predicted": "scissors"
+    },
+    {
+      "timestamp": "2025-12-04T09:20:31",
+      "user": "paper",
+      "ai": "rock",
+      "result": "user",
+      "predicted": "scissors"
+    },
+    {
+      "timestamp": "2025-12-04T09:20:41",
+      "user": "paper",
       "ai": "paper",
+      "result": "draw",
+      "predicted": "paper"
+    },
+    {
+      "timestamp": "2025-12-04T09:20:57",
+      "user": "paper",
+      "ai": "scissors",
       "result": "ai",
-      "predicted": "rock"
+      "predicted": "paper"
+    },
+    {
+      "timestamp": "2025-12-04T09:21:02",
+      "user": "rock",
+      "ai": "scissors",
+      "result": "user",
+      "predicted": "paper"
+    },
+    {
+      "timestamp": "2025-12-04T09:21:11",
+      "user": "scissors",
+      "ai": "scissors",
+      "result": "draw",
+      "predicted": "paper"
+    },
+    {
+      "timestamp": "2025-12-04T09:21:16",
+      "user": "paper",
+      "ai": "scissors",
+      "result": "ai",
+      "predicted": "paper"
+    },
+    {
+      "timestamp": "2025-12-04T09:22:25",
+      "user": "paper",
+      "ai": "rock",
+      "result": "user",
+      "predicted": "paper"
     }
   ]
 }

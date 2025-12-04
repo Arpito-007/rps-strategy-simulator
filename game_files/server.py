@@ -11,6 +11,9 @@ ai = AIPredictor(memory_size=20)
 analyzer = PatternAnalyzer(memory_size=20)
 dm = DataManager("data/stats.json")
 
+dm.clear_games()
+analyzer.history.clear()
+
 # preload history if any
 for g in dm.get_games():
     if "user" in g:
@@ -72,6 +75,14 @@ def scoreboard():
         ai_wins=ai_wins,
         draws=draws
     )
+
+@app.route("/reset_scoreboard", methods=["POST"])
+def reset_scoreboard():
+    dm.clear_games()
+    # also clear the analyzer history so AI starts fresh
+    analyzer.history.clear()
+    return redirect(url_for("scoreboard"))
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)

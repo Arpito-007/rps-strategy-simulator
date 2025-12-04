@@ -37,5 +37,7 @@ class DataManager:
 
     def get_games(self):
         return self.stats.get("games", [])
-
-
+    
+    def clear_games(self):
+        self.stats["games"] = []
+        self.save()

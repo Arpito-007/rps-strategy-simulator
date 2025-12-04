@@ -1,4 +1,5 @@
-web: python server.py
+web: python game_files/server.py
+
 
 
 

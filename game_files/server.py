@@ -1,4 +1,3 @@
-import os
 from flask import Flask, render_template, request, redirect, url_for
 from ai_engine import AIPredictor
 from pattern_analyzer import PatternAnalyzer
@@ -16,18 +15,16 @@ ai = AIPredictor(memory_size=20)
 analyzer = PatternAnalyzer(memory_size=20)
 dm = DataManager("data/stats.json")
 
-# If you want a fresh scoreboard + AI each time the server starts, keep these.
-# If you want persistence across restarts, comment them out.
+# If you want a fresh scoreboard + AI each time you start the server,
+# keep these two lines. If you want persistence across deploys, comment them out.
 dm.clear_games()
 analyzer.history.clear()
 
-# Preload history if any (after clear_games this will usually be empty)
 for g in dm.get_games():
     if "user" in g:
         analyzer.add_move(g["user"])
 
 # ------------------ Routes ------------------
-
 
 @app.route("/")
 def intro():
@@ -60,11 +57,9 @@ def play():
     if user_move in ("rock", "paper", "scissors"):
         analyzer.add_move(user_move)
 
-    # store game in JSON
     dm.record_game(user_move, ai_move, result, predicted)
     dm.save()
 
-    # session stats for result screen
     games = dm.get_games()
     user_wins = sum(1 for g in games if g.get("result") == "user")
     ai_wins = sum(1 for g in games if g.get("result") == "ai")
@@ -89,25 +84,20 @@ def play():
 
 @app.route("/change_difficulty", methods=["GET", "POST"])
 def change_difficulty():
-    """Page to switch between Easy / Medium / Hard."""
     global difficulty
 
     if request.method == "POST":
         new = request.form.get("difficulty")
         if new in ("easy", "medium", "hard"):
             difficulty = new
-        # whatever happens, go back to main game page
         return redirect(url_for("index"))
 
-    # GET request: just show the page with current difficulty
     return render_template("change_difficulty.html", current=difficulty)
 
 
 @app.route("/scoreboard")
 def scoreboard():
-    """Show stats from all games stored in JSON."""
     games = dm.get_games()
-
     user_wins = sum(1 for g in games if g.get("result") == "user")
     ai_wins = sum(1 for g in games if g.get("result") == "ai")
     draws = sum(1 for g in games if g.get("result") == "draw")
@@ -123,14 +113,11 @@ def scoreboard():
 
 @app.route("/reset_scoreboard", methods=["POST"])
 def reset_scoreboard():
-    """Clear JSON stats + AI history."""
     dm.clear_games()
     analyzer.history.clear()
     return redirect(url_for("scoreboard"))
 
 
-# ------------------ Run server (for Railway & local) ------------------
-
+# Local dev only – Gunicorn will ignore this
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Railway sets PORT env var
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True, host="0.0.0.0", port=5000)

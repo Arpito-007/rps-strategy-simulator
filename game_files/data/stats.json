@@ -1,11 +1,18 @@
 {
   "games": [
     {
-      "timestamp": "2025-12-04T17:45:06",
-      "user": "none",
+      "timestamp": "2025-12-04T23:45:50",
+      "user": "paper",
       "ai": "rock",
+      "result": "user",
+      "predicted": "paper"
+    },
+    {
+      "timestamp": "2025-12-04T23:45:58",
+      "user": "paper",
+      "ai": "scissors",
       "result": "ai",
-      "predicted": "scissors"
+      "predicted": "paper"
     }
   ]
 }

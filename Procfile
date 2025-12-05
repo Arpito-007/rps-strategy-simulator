@@ -1,4 +1,5 @@
-web: python game_files/server.py
+web: gunicorn server:app --bind 0.0.0.0:$PORT
+
 
 
 
